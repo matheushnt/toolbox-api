@@ -1,0 +1,36 @@
+app:
+  secret-key: ${SECRET_KEY}
+
+spring:
+  application:
+    name: toolboxapi
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${PG_DATABASE}
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
+
+    jpa:
+      show-sql: false
+      hibernate:
+        ddl-auto: validate
+      properties:
+        hibernate:
+          format_sql: true
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+
+    jackson:
+      mapper:
+        accept-case-insensitive-enums: true
+
+  logging:
+    level:
+      org.hibernate.SQL: DEBUG
+      org.hibernate.orm.jdbc.bind: TRACE
+      org.springframework.security: DEBUG
+
+  springdoc:
+    api-docs:
+      path: /api-docs
+    swagger-ui:
+      operationsSorter: method
+      tagsSorter: alpha
