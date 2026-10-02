@@ -1,13 +1,16 @@
 app:
   secret-key: ${SECRET_KEY}
+  admin:
+    email: ${ADMIN_EMAIL}
+    password: ${ADMIN_PASSWORD}
 
 spring:
   application:
     name: toolboxapi
   datasource:
     url: jdbc:postgresql://localhost:5432/${PG_DATABASE}
-    username: ${POSTGRES_USERNAME}
-    password: ${POSTGRES_PASSWORD}
+    username: ${PG_USERNAME}
+    password: ${PG_PASSWORD}
 
     jpa:
       show-sql: false
