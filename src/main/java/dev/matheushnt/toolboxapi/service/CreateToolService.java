@@ -49,11 +49,11 @@ public class CreateToolService {
             tool.getTitle(),
             tool.getLink(),
             tool.getDescription(),
-            toList(tool.getTags())
+            toTagNameList(tool.getTags())
         );
     }
 
-    private List<String> toList(Set<Tag> tags) {
+    private List<String> toTagNameList(Set<Tag> tags) {
         return tags.stream()
             .map(Tag::getName)
             .toList();
