@@ -1,5 +1,6 @@
 package dev.matheushnt.toolboxapi.controller;
 
+import dev.matheushnt.toolboxapi.documentation.ToolControllerApi;
 import dev.matheushnt.toolboxapi.dtos.ToolRequest;
 import dev.matheushnt.toolboxapi.dtos.ToolResponse;
 import dev.matheushnt.toolboxapi.entity.User;
@@ -27,13 +28,14 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/tools")
 @RequiredArgsConstructor
-public class ToolController {
+public class ToolController implements ToolControllerApi {
 
     private final CreateToolService createToolService;
     private final GetToolsService getToolsService;
     private final DeleteToolService deleteToolService;
 
     @PostMapping
+    @Override
     public ResponseEntity<ToolResponse> create(
         @Valid @RequestBody ToolRequest request,
         @AuthenticationPrincipal UserDetails principal
@@ -43,6 +45,7 @@ public class ToolController {
     }
 
     @GetMapping
+    @Override
     public ResponseEntity<List<ToolResponse>> list(
         @RequestParam(required = false, name = "tag") String tag,
         @AuthenticationPrincipal UserDetails principal
@@ -52,6 +55,7 @@ public class ToolController {
     }
 
     @DeleteMapping("/{toolId}")
+    @Override
     public ResponseEntity<Void> delete(
         @PathVariable UUID toolId,
         @AuthenticationPrincipal UserDetails principal
