@@ -46,6 +46,7 @@ public class Tool {
     @Column(nullable = false)
     private String description;
 
+    @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -57,5 +58,13 @@ public class Tool {
         inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
     private Set<Tag> tags = new HashSet<>();
+
+    public boolean addTag(Tag tag) {
+        return tags.add(tag);
+    }
+
+    public boolean removeTag(Tag tag) {
+        return tags.remove(tag);
+    }
 
 }
