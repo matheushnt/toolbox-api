@@ -13,6 +13,8 @@ import java.util.UUID;
 public interface ToolRepository extends JpaRepository<Tool, UUID> {
     List<Tool> findAllByUserId(UUID userId);
 
+    int deleteByIdAndUserId(UUID id, UUID userId);
+
     @Query("""
         SELECT tl
         FROM Tool tl

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -17,11 +18,11 @@ public class GetToolsService {
 
     private final ToolRepository repository;
 
-    public List<ToolResponse> execute(User user, String tagName) {
+    public List<ToolResponse> execute(UUID userId, String tagName) {
         List<Tool> tools;
 
         if (tagName != null) {
-            tools = repository.findByUserIdAndTagName(user.getId(), tagName);
+            tools = repository.findByUserIdAndTagName(userId, tagName);
         } else {
             tools = repository.findAll();
         }
