@@ -1,7 +1,6 @@
 package dev.matheushnt.toolboxapi.security;
 
 import dev.matheushnt.toolboxapi.enums.ProblemType;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

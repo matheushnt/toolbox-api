@@ -3,7 +3,6 @@ package dev.matheushnt.toolboxapi.service;
 import dev.matheushnt.toolboxapi.dtos.ToolResponse;
 import dev.matheushnt.toolboxapi.entity.Tag;
 import dev.matheushnt.toolboxapi.entity.Tool;
-import dev.matheushnt.toolboxapi.entity.User;
 import dev.matheushnt.toolboxapi.repository.ToolRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
