@@ -1,4 +1,26 @@
 services:
+  application:
+    build:
+      context: .
+      target: final
+      args:
+        UID: 1001
+        GID: 1001
+    container_name: toolbox_app
+    restart: unless-stopped
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${PG_DATABASE}
+      SPRING_DATASOURCE_USERNAME: ${PG_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${PG_PASSWORD}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
   db:
     image: postgres:17
     container_name: toolbox_db
@@ -7,12 +29,10 @@ services:
       POSTGRES_DB: ${PG_DATABASE}
       POSTGRES_USER: ${PG_USERNAME}
       POSTGRES_PASSWORD: ${PG_PASSWORD}
-    ports:
-      - "5432:5432"
     volumes:
       - toolbox_db_data:/var/lib/postgresql/data
     healthcheck:
-      test: [ "CMD", "pg_isready" ]
+      test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}" ]
       interval: 30s
       timeout: 10s
       retries: 5
